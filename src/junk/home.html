@@ -1,0 +1,50 @@
+<html>
+
+   <head>
+    <!---  <script type = "text/javascript"
+         src = "{{ url_for('static', filename = 'main.js') }}" ></script>-->
+   </head>
+
+   <body link="blue">
+    <fieldset>
+     <legend>Options</legend>
+     <table border = 0 cellspacing=50 width=50% height=50px >
+    {% if session['logged_in'] == True %}
+    <!---<tr><th> {{ session['logged_in']}} </th><tr>-->
+    <tr><th> <a href = "http://localhost:5000/logout">Click here to Logout </a> </th></tr>
+    {% else %}
+    <tr><th><a href =  "http://localhost:5000/register">Click here to customer register/login</a></th></tr>
+    <tr><th><a href = "http://localhost:5000/seller_register"> Click here to seller register/login </a></th></tr>
+    {% endif %}
+       <tr>
+	<th>
+	  <a href =  "http://localhost:5000/cart">Click here for cart </a>
+        </th>
+      </tr>
+     </table>
+     </fieldset>
+     {% if rows == []  %}
+     <h3> No Products Available Currently </h3>
+     {% else %}
+     <table border = 1 cellspacing=10 width=30% height=50px bgcolor="#ffff9f">
+       <tr>
+         <th> Product Name </th>
+         <th> MRP </th>
+         <th> Selling At</th>
+         <th>  Seller </th>
+         <th> Link </th>
+       </tr>
+       {% for row in rows %}
+       <tr>
+         <th> {{row[0]}}</th>
+         <th> {{row[1]}}</th>
+         <th> {{row[2]}}</th>
+         <th> {{row[4]}}</th>
+         <th> <a href ={{ url_for( 'products', proName = row[0], sellerName = row[4] ) }}> Click me</a> </th>
+       </tr>
+       {% endfor %}
+     </table>
+     {% endif %}
+   </body>
+
+</html>

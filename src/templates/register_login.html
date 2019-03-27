@@ -1,0 +1,96 @@
+
+{% block content1 %}
+  {% if type == "Register"  or type == "Register_now"%}
+  <h4> New Customers .... ? </h4>
+  <form action="" method="POST" onsubmit="return validate()">
+    <br>
+    <input type="text" name="username" placeholder="User Name" required="" maxlength="20" minlength="4"><br>
+    <input type="email" name="email" placeholder="Email" required=""><br>
+    <input type="text" name="address" placeholder="Address" required=""> <br>
+    <input type="tel" name="phone" class="phone_number" placeholder="Phone Number" required> <br>
+    <input type="password" name="password" placeholder="Password" required="" minlength="4" maxlength="20" id="password"><br>
+    <input type="password" name="confirm" placeholder="Confirm Password" required="" id="confirm"><br><br><br>
+    <input type="submit" value="Sign Up">
+  </form>
+ {% elif type == "Login" or type == "Login_now"%}
+    <h4> Customer Login </h4><br><br><br>
+    <form action="" method="POST">
+      <input type="text" name="username" placeholder="User Name" required="" maxlength="20"><br><br>
+      <input type="password" name="password" placeholder="Password" required="" id = "passwords" maxlength="20"><br><br>
+      <input type="checkbox" onclick="showpassword()"><span style="color : white" >  Show Password  </span><br><br><br>
+      <input type="submit" value="Login">
+    </form>
+  {% elif type == "Seller_Register" %}
+  <h4> New Seller .... ? </h4> <br>
+  <form action="" method="POST" onsubmit="return validate()">
+    <input type="text" name="name" placeholder = "Name" required="" minlength="4">
+    <input type="text" name="username" placeholder="Username" required="" minlength="4" maxlength="20">
+    <input type="email" name="email" placeholder = "Email" required="">
+    <input type="tel" name="phone" class="phone_number"  placeholder = "Phone No" required="">
+    <input type="number" name="pincode"  class="phone_number"placeholder="Pin-code" max="999999" min='100000'>
+    <input type="text" name="address" placeholder="Address" required="">
+    <input type="password" name="password" placeholder="Password" required="" id="password">
+    <input type="password" name="confirm" placeholder="Confirm Password" required="" id="confirm">
+    <input type="submit" value="Sign Up">
+  </form>
+  {% elif type == "Seller_Login" %}
+      <br>
+     <h4> Seller Login </h4><br><br> <br>
+     <form action="" method="POST">
+       <input type="text" name="username" placeholder="User Name" required="" maxlength="20"><br><br>
+       <input type="password" name="password" placeholder="Password" required="" id = "passwords" maxlength="20"><br><br>
+       <input type="checkbox" onclick="showpassword()"><span style="color : white" >  Show Password  </span><br><br><br>
+       <input type="submit" value="Login">
+     </form>
+  {% elif type == 'editProfile' and session['usertype'] == 'seller' %}
+     <h4> Edit Profile </h4>
+     <form action="{{url_for('updateProfile_seller')}}" method="POST">
+   		<p style="color:red;">User Name:</p><br><input type="text" name="username" value={{profileData[1]}} readonly = 'readonly'>
+   		<p style="color:red;">Email:</p><br><input type="email" name="email" value={{profileData[2]}} readonly="readonly">
+   		<p style="color:red;">Address: </p><br><input type="text" name="address" value={{profileData[3]}}>
+   		<p style="color:red;">Phone Number: </p><br><input type="tel" name="phone" class="phone_number" value={{profileData[5]}} minlength = "10">
+   		<p style="color:red;">Name:</p><br><input type="text" name="name" value={{profileData[0]}}>
+   		<p style="color:red;">Pincode: </p><br><input type="number" name="pincode" class="phone_number" value={{profileData[4]}} min = "500000" max = "999999">
+      <br>
+      <br>
+   		<input type="submit" value="Save">
+   	</form>
+    {% elif type == "addproducts" %}
+    <!---{% from '_formhelpers.html' import render_field  %}-->
+        <form action="{{url_for('addproducts')}}" method="post">
+          <dl>
+    <!---      {{render_field(form.name)}}
+          {{render_field(form.mrp)}}
+          {{render_field(form.sellingAt)}}
+          {{render_field(form.quantity)}}-->
+          <input type="text" placeholder="Product Name" name="name" class = "pn"><br>
+          <input type="text" name="brand" placeholder="Brand" class = "pn"><br>
+          <input type="number" name="size" placeholder="Size" class="phone_number" class = "pn" max ="12" min="6"><br>
+          <input type="number" placeholder="MRP" name="mrp" class="phone_number" class = "pn" min='0'><br>
+          <input type="number" placeholder="Selling Price" class="phone_number" name="sellingAt" class  = "pn" min='0'><br>
+          <input type="number" placeholder="quantity" class="phone_number" name="quantity" class = "pn" min='1'><br>
+          <input type="text" name="Image1" placeholder="URL for Image1"> <br>
+          <input type="text" name="Image2" placeholder="URL for Image2"> <br>
+          <input type="text" name="Image3" placeholder="URL for Image3"> <br>
+        </dl>
+          <input type="submit"  class="submit"value="Add Product">
+        </form>
+    {% elif type == 'editProfile' and session['usertype'] == 'customer' %}
+    <h4>Edit Profile</h4>
+    <form action="{{url_for('updateProfile')}}" method="POST">
+  		<p style="color:red;">User Name:</p><br/><input type="text" name="username" value={{profileData[0]}} readonly = 'readonly'>
+  		<p style="color:red;">Email:</p><br/><input type="email" name="email" value={{profileData[1]}} readonly="readonly">
+  		<p style="color:red;">Address: </p><br/><input type="text" name="address" value={{profileData[3]}} required = "">
+  		<p style="color:red;">Phone Number: </p><br/><input type="tel" name="phone" value={{profileData[4]}} minlength = "10" class="phone_number" required = "">
+  		<input type="submit" value="Save">
+    </form>
+    {% else %}
+    <h4>Update Password</h4>
+    <form action={{ url_for('changePassword') }} method="POST" onsubmit="return validate()">
+  	   <p style="color:red;">Old Password: </p><br><input type="password" name="oldPassword">
+  	   <p style="color:red;">New Password: </p><br><input type="password" name="newPassword" id="password" minlength="5" maxlength="20">
+  	   <p style="color:red;">Confirm Password: </p><br><input type="password" name="confirm" id="confirm">
+  	   <input type="submit" value="Save">
+    </form>
+  {% endif %}
+ {% endblock %}

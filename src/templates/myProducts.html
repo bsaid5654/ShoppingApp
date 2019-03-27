@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home 02</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="{{url_for('static',filename='images/icons/favicon.png')}}"/>
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='fonts/iconic/css/material-design-iconic-font.min.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='fonts/linearicons-v1.0.0/icon-font.min.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/css-hamburgers/hamburgers.min.css')}}">
+<!--===============================================================================================-->
+<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/animsition/css/animation.css')}}"> -->
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/daterangepicker/daterangepicker.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/slick/slick.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/MagnificPopup/magnific-popup.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/util.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/main.css')}}">
+<!--===============================================================================================-->
+</head>
+<body class="animsition">
+
+	<!-- Header -->
+	<header class="header-v2">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop trans-03">
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop p-l-45">
+
+					<!-- Logo desktop -->
+					<a href="{{url_for('home')}}" class="logo">
+						<img src="{{url_for('static',filename='images/icons/logo-01.png')}}" alt="IMG-LOGO">
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<a href="{{url_for('myProducts')}}">My Products</a>
+							</li>
+							{% if 'logged_in' in session %}
+							<li>
+								<a href="{{url_for('addproducts')}}">Add Products</a>
+							</li>
+							<li class="active-menu">
+								<a href="#">My Account</a>
+								<ul class="sub-menu">
+									{% if session['usertype'] == 'seller' %}
+									<li><a href="{{url_for('updateProfile_seller')}}">Update Profile</a></li>
+									{% endif %}
+									<li><a href="{{url_for('changePassword')}}">Change Password</a></li>
+									<li><a href="{{url_for('mysellings')}}">My Sellings</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://localhost:5000/logout"> Logout</a>
+							</li>
+							{% else %}
+							<li>
+								<a href="http://localhost:5000/login"> Buyer Login</a>
+							</li>
+
+							<li>
+								<a href="http://localhost:5000/seller_login"> Seller Login</a>
+							</li>
+							{% endif %}
+
+
+						</ul>
+					</div>
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m h-full">
+						<div class="flex-c-m h-full p-r-24">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
+								<i class="zmdi zmdi-search"></i>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="{{url_for('static',filename='images/icons/icon-close2.png')}}" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15" action="{{ url_for('search_seller')}}" method="POST">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="searchName" placeholder="Search..." required>
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<!-- Product -->
+	<div class="bg0 m-t-23 p-b-140">
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-52">
+
+				<div class="container">
+					<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+						<a href="{{url_for('home')}}" class="stext-109 cl8 hov-cl1 trans-04">
+							Home
+							<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+						</a>
+
+						<span class="stext-109 cl4">
+							My Products
+						</span>
+					</div>
+				</div>
+
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<div class="bor8 dis-flex p-l-15">
+						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+					</div>
+				</div>
+
+				<!-- Filter -->
+				</div>
+			{% if sellings == []  or sellings == None %}
+			<h3> No Products Available Currently </h3>
+			{% else %}
+			<div class="row isotope-grid">
+				{% for row in sellings %}
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="{{row[8]}}" alt="IMG-PRODUCT">
+					</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="{{ url_for( 'products', proName = row[0], sellerName = row[6], size = row[2] ) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									{{row[0]}}
+								</a>
+
+								<span class="stext-105 cl3">
+									<strike>₹{{row[3]}}</strike>&nbsp;&nbsp;<h5><strong>₹{{row[4]}}</strong></h5>
+								</span>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="{{url_for('static',filename='images/icons/icon-heart-01.png')}}" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{url_for('static',filename='images/icons/icon-heart-02.png')}}" alt="ICON">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+{% endfor %}
+				</div>
+			{% endif %}
+  <footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="p-t-40">
+				<p class="stext-107 cl6 txt-center">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | CSVK
+				</p>
+			</div>
+		</div>
+	</footer>
+
+
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/animsition/js/animsition.min.js')}}"></script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/bootstrap/js/popper.js')}}"></script>
+  	<script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/select2/select2.min.js')}}"></script>
+  	<script>
+  		$(".js-select2").each(function(){
+  			$(this).select2({
+  				minimumResultsForSearch: 20,
+  				dropdownParent: $(this).next('.dropDownSelect2')
+  			});
+  		})
+  	</script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/daterangepicker/moment.min.js')}}"></script>
+  	<script src="{{url_for('static',filename='vendor/daterangepicker/daterangepicker.js')}}"></script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/slick/slick.min.js')}}"></script>
+  	<script src="{{url_for('static',filename='js/slick-custom.js')}}"></script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/parallax100/parallax100.js')}}"></script>
+  	<script>
+          $('.parallax100').parallax100();
+  	</script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/MagnificPopup/jquery.magnific-popup.min.js')}}"></script>
+  	<script>
+  		$('.gallery-lb').each(function() { // the containers for all your galleries
+  			$(this).magnificPopup({
+  		        delegate: 'a', // the selector for gallery item
+  		        type: 'image',
+  		        gallery: {
+  		        	enabled:true
+  		        },
+  		        mainClass: 'mfp-fade'
+  		    });
+  		});
+  	</script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/isotope/isotope.pkgd.min.js')}}"></script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/sweetalert/sweetalert.min.js')}}"></script>
+  	<script>
+  		$('.js-addwish-b2').on('click', function(e){
+  			e.preventDefault();
+  		});
+
+  		$('.js-addwish-b2').each(function(){
+  			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+  			$(this).on('click', function(){
+  				swal(nameProduct, "is added to wishlist !", "success");
+
+  				$(this).addClass('js-addedwish-b2');
+  				$(this).off('click');
+  			});
+  		});
+
+  		$('.js-addwish-detail').each(function(){
+  			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+  			$(this).on('click', function(){
+  				swal(nameProduct, "is added to wishlist !", "success");
+
+  				$(this).addClass('js-addedwish-detail');
+  				$(this).off('click');
+  			});
+  		});
+
+  		/*---------------------------------------------*/
+
+  		$('.js-addcart-detail').each(function(){
+  			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+  			$(this).on('click', function(){
+  				swal(nameProduct, "is added to cart !", "success");
+  			});
+  		});
+  	</script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+  	<script>
+  		$('.js-pscroll').each(function(){
+  			$(this).css('position','relative');
+  			$(this).css('overflow','hidden');
+  			var ps = new PerfectScrollbar(this, {
+  				wheelSpeed: 1,
+  				scrollingThreshold: 1000,
+  				wheelPropagation: false,
+  			});
+
+  			$(window).on('resize', function(){
+  				ps.update();
+  			})
+  		});
+  	</script>
+  <!--===============================================================================================-->
+  	<script src="{{url_for('static',filename='js/main.js')}}"></script>
+
+</body>
+</html>

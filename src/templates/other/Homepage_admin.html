@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename = 'home.css') }}" rel="stylesheet" type="text/css" media="all"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</head>
+<body id="main">
+<div class="sidenav" id="mySidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">Add Product</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">Update Product</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">History</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">Remove Product</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">Add Seller</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">Remove Seller</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">Block Customer</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">Suggestions</a>
+    <a href="#" style="padding:1em 3em; font-size:1vw">categories</a>
+</div>
+<nav class="navbar navbar-inverse" style="background-color:#333">
+  <div class="container-fluid" style="font-size:1em;">
+    <ul class="nav navbar-nav navbar-right">
+      {% if session['logged_in'] == True %}
+      <li><a href="http://localhost:5000/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+      {% else %}
+      <li><a href="http://localhost:5000/login"><span class="glyphicon glyphicon-log-in"></span> Buyer Login</a></li>
+      <li><a href="http://localhost:5000/seller_login"><span class="glyphicon glyphicon-log-in"></span> Seller Login</a></li>
+      {% endif %}
+    </ul>
+    <ul class="nav navbar-nav navbar-left">
+      <li><a onclick="openNav()"><span class="glyphicon glyphicon-align-justify"></span></a>
+        </li>
+    </ul>
+    <center><b><i><h3 style="color:red;">TRENDY - WORLD'S MOST TRUSTED ONLINE SHOPPING APP</h3></i></b></center>
+  <form class="navbar-form" action="/action_page.php">
+      <div class="input-group" style="width:100%; left:6%;" >
+        <input type="text" class="form-control" placeholder="Search" name="search" style="width:100%;">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit" style="">
+            <i class="glyphicon glyphicon-search" ></i>
+          </button>
+        </div>
+      </div>
+    </form>
+</nav>
+</div>
+</body>
+</html>

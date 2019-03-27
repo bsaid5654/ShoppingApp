@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Trendy</title>
+<!-- Custom Theme files -->
+<link href="{{ url_for('static', filename = 'style.css') }}" rel="stylesheet" type="text/css" media="all"/>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Trendy Signup Form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!-- //for-mobile-apps -->
+<!-- font-awesome icons -->
+<!---<link href="{{ url_for('static', filename = 'font-awesome.js') }}" rel="stylesheet">-->
+<!-- //font-awesome icons -->
+<!--Google Fonts-->
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<script src="{{ url_for('static', filename = 'jquery-1.11.1.min.js') }}" ></script>
+<script src="{{ url_for('static', filename = 'validate_password.js') }}" ></script>
+</head>
+<body>
+<div class="wthree-dot">
+	<h1>Cozastore</h1>
+	<div class="profile">
+		<div class="wrap">
+			<div class="wthree-grids">
+				<div class="content-left">
+					<div class="content-info">
+						<h2>{{proname}}</h2>
+            <br>
+						<div class="slider">
+							<div class="callbacks_container">
+								<ul class="rslides callbacks callbacks1">
+									<li>
+                    <img src="{{image}}" alt="IMG-PRODUCT" style="width:40%; height:40%;">
+										<br>
+										<br>
+										</li>
+                    <br>
+									<li style="color:red;">
+                    <p style="color:black">Seller : <span style="color:red;">{{sellername}}</span></p>
+										<br>
+									</li>
+                  <li  style="color:red;">
+                  <p  style="color:black;"> Size :  <span style="color:red;">{{size}}</span></p></li>
+								</ul>
+              </div>
+							</div>
+							<div class="clear"> </div>
+						</div>
+						<div class="agile-signin">
+							<h4>Back to home page <a href="{{ url_for("home") }}">Home</a></h4>
+							<h4>To Change Password -> <a href="	{{url_for('changePassword')}}"> Update</a></h4>
+							<br>
+							<br>
+							</div>
+					</div>
+				</div>
+				<div class="content-main">
+					<div class="w3ls-subscribe">
+						{% include 'invalid_credential.html' %}
+						<div> {% block content %} {% endblock %} </div>
+            {% if feedBack == "Yes"%}
+            <strong><h2 style="color:red;"> Your FeedBack was already given.Thank You</h2></strong>
+            {% else %}
+            <form  action="{{url_for('feedback', proname = proname, sellername = sellername, size = size)}}" method="POST">
+              <p style="color:red;">Comment :</p>
+              <br>
+              <textarea name = "feedback" placeholder="feedback" required="" rows="6" cols="50" class="phone_number"></textarea>
+							<br/>
+							<br/>
+              <br/>
+              <p style="color:red;">Ratings</p><br/>
+               <input type="number" name="ratings" max="5" min="1" placeholder = "ratings" class = phone_number required= ""> <br>
+							 <br>
+							 <br>
+							 <input type="submit" name="" value="Submit">
+            </form>
+            {% endif %}
+					</div>
+				</div>
+				<div class="clear"> </div>
+			</div>
+			<div class="wthree_footer_copy">
+				<p>© 2018 Trendy | Design by CK</p>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{{ url_for('static', filename = 'responsiveslides.min.js') }}"></script>
+									<script>
+										// You can also use "$(window).load(function() {"
+										$(function () {
+										  // Slideshow 4
+										  $("#slider4").responsiveSlides({
+											auto: true,
+											pager:true,
+											nav:false,
+											speed: 400,
+											namespace: "callbacks",
+											before: function () {
+											  $('.events').append("<li>before event fired.</li>");
+											},
+											after: function () {
+											  $('.events').append("<li>after event fired.</li>");
+											}
+										  });
+
+										});
+									 </script>
+									<!--banner Slider starts Here-->
+									<script>
+function showpassword() {
+    var x = document.getElementById("passwords");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+</script>
+</body>
+</html>

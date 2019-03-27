@@ -1,0 +1,84 @@
+body {
+  font-family:"montserrat-bold",sans-serif;
+  background: url(./images/1.jpg) no-repeat 0px 0px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 20px 8px 20px;
+    font-family:"montserrat-bold",sans-serif;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    text-decoration: none;
+    background: #FF0606;
+    color: white;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right : 0;
+    font-size: 20px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.pn{
+  outline: none;
+  padding: 1em;
+  background: None;
+  /*height : 100px;
+  width : 500px;*/
+  border: 1px solid #ffffff;
+  color: white;
+  font-size: 1em;
+  margin:0 0 1.5em 0;
+  width: 40%;
+
+}
+.submit{
+    color: #ffffff;
+    font-size: .9em;
+    text-decoration: none;
+    padding: 1em 2em;
+    cursor: pointer;
+    background: #F44336;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    border: solid 1px #f44336;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+.submit:hover{
+	background:none;
+    border: solid 1px #FFFFFF;
+}

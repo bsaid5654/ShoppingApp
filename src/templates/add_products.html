@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Trendy</title>
+<!-- Custom Theme files -->
+<link href="{{ url_for('static', filename = 'style.css') }}" rel="stylesheet" type="text/css" media="all"/>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Trendy Signup Form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!-- //for-mobile-apps -->
+<!-- font-awesome icons -->
+<!---<link href="{{ url_for('static', filename = 'font-awesome.js') }}" rel="stylesheet">-->
+<!-- //font-awesome icons -->
+<!--Google Fonts-->
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<script src="{{ url_for('static', filename = 'jquery-1.11.1.min.js') }}" ></script>
+<script src="{{ url_for('static', filename = 'validate_password.js') }}" ></script>
+</head>
+<body>
+<div class="wthree-dot">
+	<h1>Trendy</h1>
+	<div class="profile">
+		<div class="wrap">
+			<div class="wthree-grids">
+				<div class="content-left">
+					<div class="content-info">
+						<h2>ADD PRODUCT</h2>
+						<div class="slider">
+							<div class="callbacks_container">
+								<ul class="rslides callbacks callbacks1" id="slider4">
+									<li>
+										<div class="w3layouts-banner-info">
+											{% if type == "Register" or type == "Seller_Register" %}
+											<br>
+											{% endif %}
+											<h3>INVALID CREDENTIALS</h3>
+											{% if type == "Register" or type == "Seller_Register" %}
+											<br>
+											{% endif %}
+									<p> May be did meet the required credentials while SIGN-UP </p>
+										<!---	<p> May be details not according to specified while SIGN-UP </p> -->
+										{% if type == "Register" or type == "Seller_Register" %}
+										<br>
+										{% endif %}
+											<p> May be wrong details entered during LOGIN </p>
+										</div>
+									</li>
+									<li>
+										<div class="w3layouts-banner-info">
+											{% if type == "Register" or type == "Seller_Register" %}
+											<br>
+											{% endif %}
+											<h3>SIGN-UP</h3>
+											{% if type == "Register" or type == "Seller_Register" %}
+											<br>
+											{% endif %}
+											<p>Username should be of length 4 and max of 20</p>
+											{% if type == "Register" or type == "Seller_Register" %}
+											<br>
+											{% endif %}
+											<p>Password should be of length 8 and max of 20</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="clear"> </div>
+						</div>
+						<br><br><br><br>
+						<div class="agile-signin">
+							<h4>Back to home page <a href="{{ url_for("home") }}">Home</a></h4>
+							<h4>To Change Password -> <a href="	{{url_for('changePassword')}}"> Update</a></h4>
+							<br>
+							</div>
+					</div>
+				</div>
+				<div class="content-main">
+					<div class="w3ls-subscribe">
+						{% include 'invalid_credential.html' %}
+						<div> {% block content %} {% endblock %} </div>
+						{% include 'register_login.html' %}
+							{% block content1 %} {% endblock %}
+					</div>
+				</div>
+				<div class="clear"> </div>
+			</div>
+			<div class="wthree_footer_copy">
+				<p>© 2018 Trendy | Design by CK</p>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{{ url_for('static', filename = 'responsiveslides.min.js') }}"></script>
+									<script>
+										// You can also use "$(window).load(function() {"
+										$(function () {
+										  // Slideshow 4
+										  $("#slider4").responsiveSlides({
+											auto: true,
+											pager:true,
+											nav:false,
+											speed: 400,
+											namespace: "callbacks",
+											before: function () {
+											  $('.events').append("<li>before event fired.</li>");
+											},
+											after: function () {
+											  $('.events').append("<li>after event fired.</li>");
+											}
+										  });
+
+										});
+									 </script>
+									<!--banner Slider starts Here-->
+									<script>
+function showpassword() {
+    var x = document.getElementById("passwords");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+</script>
+</body>
+</html>

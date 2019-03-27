@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename = 'home.css') }}" rel="stylesheet" type="text/css" media="all"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "300px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</head>
+<body id="main">
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" style="padding:1em 3em; font-size:1vw">Your Orders</a>
+  <a href="#" style="padding:1em 3em; font-size:1vw">Your Wish List</a>
+  <a href="#" style="padding:1em 3em; font-size:1vw">Edit Profile</a>
+  <a href="#" style="padding:1em 3em; font-size:1vw">Profile</a>
+  <a href="#" style="padding:1em 3em; font-size:1vw">Suggestions</a>
+</div>
+<nav class="navbar navbar-inverse" style="background-color:#333">
+  <div class="container-fluid" style="font-size:1em;">
+    <ul class="nav navbar-nav navbar-right">
+      {% if session['logged_in'] == True %}
+      <li><a href="http://localhost:5000/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+      <li><a href="http://localhost:5000/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+      {% else %}
+      <li><a href="http://localhost:5000/login"><span class="glyphicon glyphicon-log-in"></span> Buyer Login</a></li>
+      <li><a href="http://localhost:5000/seller_login"><span class="glyphicon glyphicon-log-in"></span> Seller Login</a></li>
+      {% endif %}
+    </ul>
+    <ul class="nav navbar-nav navbar-left">
+      <li><a onclick="openNav()"><span class="glyphicon glyphicon-align-justify"></span></a>
+        </li>
+    </ul>
+    <center><b><i><h3 style="color:red;">TRENDY - WORLD'S MOST TRUSTED ONLINE SHOPPING APP</h3></i></b></center>
+    <form class="navbar-form" action="{{ url_for('search')}}" method="POST">
+        <div class="input-group" style="width:50%; left:6%;" >
+            <span><input type="search" class="form-control" placeholder="Search" name="searchName" style="width:100%;" required></span>
+            <span><input type="submit" name="" value="Search"></span>
+          </div>
+      </form>
+    </div>
+</nav>
+{% if rows == []  or rows == None %}
+<h3> No Products Available Currently </h3>
+{% else %}
+<table border = 1 cellspacing=10 width=30% height=50px bgcolor="#ffff9f">
+  <tr>
+    <th> Product Name </th>
+    <th> MRP </th>
+    <th> Selling At</th>
+    <th>  Seller </th>
+    <th> Link </th>
+  </tr>
+  {% for row in rows %}
+  <tr>
+    <th> {{row[0]}}</th>
+    <th> {{row[1]}}</th>
+    <th> {{row[2]}}</th>
+    <th> {{row[4]}}</th>
+    <th> <a href ={{ url_for( 'products', proName = row[0], sellerName = row[4] ) }}> Click me</a> </th>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+</body>
+</html>
